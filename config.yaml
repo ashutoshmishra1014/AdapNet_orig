@@ -1,0 +1,62 @@
+model: Adapnet
+phase: train
+data:
+ data_size: [384, 768]
+ directory: /home/ashutosh/Documents/mt_code/datasets/resized_384_height_768_width_train_data_new_split/rgb
+ tfrecord:
+  directory: ./tf_datasets/rgb
+  train_filename: freiburg-train-rgb.tfrecords
+  val_filename: freiburg-val-rgb.tfrecords
+  # test_filename: freiburg-test-rgb.tfrecords
+  # all images should be in png format i.e the images and their labels as well
+ classes:
+  road: [170,170,170]
+  grass: [0,255,0]
+  vegetation: [102,102,51]
+  tree: [0,60,0]
+  sky: [0,120,255]
+  obstacle: [0,0,0]
+data_processing:
+ whitening: false
+ random_crop: false
+ max_crop: 32
+ crop_height: 256
+ crop_width: 256
+ horizontal_flip: false
+ vertical_flip: false
+ brightness: false
+ rotation: false
+ all_augmentation: false
+ random_augmentation: false
+training_setting:
+ analyse_lr: false
+ epochs: 300
+ batch_size: 7
+ class_balancing: default
+ padding_scheme: caffe
+ save_visualization_image: true
+ logging:
+  display_iteration: 210
+  evaluation_iteration: 210
+  training_note: "rgb data"
+ checkpoints:
+  save_directory: ./checkpoints
+  prefix: "adapnet"
+  save_step: 210
+ loss: cross_entropy
+ optimizer: Adam
+ learning_rate: 0.01
+ lr_mult: 1
+ lr_mult_bias: 2
+ cyclic_learning_rate:
+  type: ""
+  additional_setting: ""
+ weight_decay: 5e4
+ clip_norm: 1.0
+testing_setting:
+ batch_size: 32
+
+
+
+
+

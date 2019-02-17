@@ -1,0 +1,5 @@
+/checkpoints
+/config_dir
+/config_dir_prepare_data
+/tf_datasets
+*.pyc
